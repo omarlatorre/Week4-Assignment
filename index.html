@@ -1,1 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Developing Data Products</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Developing Data Products">
+  <meta name="author" content="Omar Latorre">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
 
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Developing Data Products</h1>
+    <h2>Week4 Assignment</h2>
+    <p>Omar Latorre<br/>Coursera Student</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Executive Summary</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This detailed analysis has been performed to fulfill the requirements of the course project for the course Developing Data Products offered by the Johns Hopkins University on Coursera. In this project, we will display the mtcars data set and explore the relationship between a set of variables and miles per gallon (MPG) which will be our outcome.</p>
+
+<p>The main objectives of this research are as follows:</p>
+
+<ol>
+<li>To create a Shiny Application which is available at the Shiny website
+<a href="https://omarlatorre.shinyapps.io/Week4_Assignment/">https://omarlatorre.shinyapps.io/Week4_Assignment/</a></li>
+<li>To create a R Presentation which is available at Github repository <a href="https://omarlatorre.github.io/Week4-Assignment/index.html">https://omarlatorre.github.io/Week4-Assignment/index.html</a><br></li>
+</ol>
+
+<p>The files is available at Github repository <a href="https://github.com/omarlatorre/Week4-Assignment">https://github.com/omarlatorre/Week4-Assignment</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id1" style="background:;">
+  <article data-timings="">
+    <!-- ## To create a Shiny Application : -->
+
+<!-- Review criteria for this assignment is as below : -->
+
+<!-- - Was there enough documentation on the shiny site for a user to get started using the application? -->
+
+<!-- - Did the application run as described in the documentation? -->
+
+<!-- -Was there some form of widget input (slider, textbox, radio buttons, checkbox, …) in either ui.R or a custom web page? -->
+
+<!-- -Did server.R perform some calculations on the input in server.R? -->
+
+<!-- -Was the server calculation displayed in the html page? -->
+
+<!-- -Was the app substantively different than the very simple applications built in the class? Note, it’s OK if the app is simple and based on the one presented in class. I just don’t want it to be basically a carbon copy of the examples we covered. For example, if someone simply changed the variable names, then this would not count. However, a prediction algorithm that had a similar layout would be fine. -->
+
+<!-- -Here’s your opportunity to give the app +1 for being well done, or neat, or even just a solid effort. -->
+
+<!-- --- .class #id2  -->
+
+<!-- ## To create a R Presentation : -->
+
+<!-- The Presentation is available at Github repository https://omarlatorre.github.io/Week4-Assignment/index.html   -->
+
+<!-- Review criteria for this assignment is as below : -->
+
+<!-- - Was the presentation completed in slidify or R Presenter? -->
+
+<!-- - Was it 5 pages? -->
+
+<!-- - Did it contain an R expression that got evaluated and displayed? -->
+
+<!-- - Did it contain an R expression that got evaluated and displayed? -->
+
+<!-- - Was it hosted on github or Rpubs? -->
+
+<!-- - Was the server calculation displayed in the html page? -->
+
+<!-- - Here’s your opportunity to give this presentation a +1 for being well done. Did they tinker around with the default style? Was the presentation particularly lucid and well organized? In other words, the student made a legitimate try. -->
+
+<!-- - There were no R errors displayed in the presentation. -->
+
+<!-- --- .class #id3  -->
+
+<h2>Aplication</h2>
+
+<p>URL for Shiny application is <a href="https://omarlatorre.shinyapps.io/Week4_Assignment/">https://omarlatorre.shinyapps.io/Week4_Assignment/</a></p>
+
+<p>The Application contains :</p>
+
+<p>Left Pane :</p>
+
+<ul>
+<li>Select MPG Range using Slider Range. Data Range contains minimum mpg as 10.4 and maximum mpg as 33.9.</li>
+<li>Select Variable from Dataset. This is a multi select text field which contains columns from mtcars such as: mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, and carb.</li>
+</ul>
+
+<p>Main Panel :
+There are four panes in main panel as below :</p>
+
+<ul>
+<li>Summary : This displays summary for the data as per user selection.</li>
+<li>Structure : This displays Strucutre for the data as per user selection.</li>
+<li>Data : This displays data frame for the user selected options.</li>
+<li>Plot : This displays plot for corresponding dataframe</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id5" style="background:;">
+  <hgroup>
+    <h2>R code</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(shiny)
+library(ggplot2)
+
+#Read Data
+library(datasets)
+data(mtcars)
+head(mtcars)
+</code></pre>
+
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id4" style="background:;">
+  <article data-timings="">
+    <!-- ## Summary Tab -->
+
+<!-- ![](assets/img/Summary.png) -->
+
+<!-- --- .class #id6 -->
+
+<!-- ## Structure Tab -->
+
+<!-- ![](assets/img/Structure.png) -->
+
+<!-- --- .class #id7 -->
+
+<!-- ## Data Tab -->
+
+<!-- ![](assets/img/Data.png) -->
+
+<!-- --- .class #id8 -->
+
+<h2>Plot Tab</h2>
+
+<p><img src="assets/img/Plot.png" alt=""></p>
+
+<!-- --- .class #id9 -->
+
+<!-- ## Thank you -->
+
+<!-- ![](assets/img/thankyou.png) -->
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Executive Summary'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='NA'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='R code'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='NA'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
